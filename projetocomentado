@@ -1,0 +1,181 @@
+#Pessoa.cs
+Esta classe representa um hóspede. Ela é a base para criar e gerenciar as informações de cada pessoa que fará parte da reserva.
+
+namespace DesafioProjetoHospedagem.Models
+{
+    public class Pessoa
+    {
+        // Construtor padrão da classe. Permite criar um objeto Pessoa sem passar nenhum dado inicial.
+        public Pessoa() { }
+
+        // Construtor que recebe apenas o nome do hóspede.
+        public Pessoa(string nome)
+        {
+            Nome = nome;
+        }
+
+        // Construtor completo que recebe nome e sobrenome. Ideal para inicializar o objeto com todas as informações.
+        public Pessoa(string nome, string sobrenome)
+        {
+            Nome = nome;
+            Sobrenome = sobrenome;
+        }
+
+        // Propriedade para armazenar o nome do hóspede.
+        public string Nome { get; set; }
+
+        // Propriedade para armazenar o sobrenome do hóspede.
+        public string Sobrenome { get; set; }
+
+        // Propriedade somente leitura (get-only) que retorna o nome completo.
+        // O "=>" é uma forma concisa de definir uma propriedade que retorna o resultado de uma expressão.
+        public string NomeCompleto => $"{Nome} {Sobrenome}".ToUpper();
+    }
+
+    Com certeza! Preparei o código completo do projeto com comentários detalhados e didáticos, perfeitos para serem incluídos no seu repositório. Cada trecho de código explica o propósito das classes, das propriedades e a lógica por trás dos métodos, facilitando a compreensão para qualquer pessoa que acesse seu projeto.
+
+Pessoa.cs
+Esta classe representa um hóspede. Ela é a base para criar e gerenciar as informações de cada pessoa que fará parte da reserva.
+
+C#
+
+namespace DesafioProjetoHospedagem.Models
+{
+    public class Pessoa
+    {
+        // Construtor padrão da classe. Permite criar um objeto Pessoa sem passar nenhum dado inicial.
+        public Pessoa() { }
+
+        // Construtor que recebe apenas o nome do hóspede.
+        public Pessoa(string nome)
+        {
+            Nome = nome;
+        }
+
+        // Construtor completo que recebe nome e sobrenome. Ideal para inicializar o objeto com todas as informações.
+        public Pessoa(string nome, string sobrenome)
+        {
+            Nome = nome;
+            Sobrenome = sobrenome;
+        }
+
+        // Propriedade para armazenar o nome do hóspede.
+        public string Nome { get; set; }
+
+        // Propriedade para armazenar o sobrenome do hóspede.
+        public string Sobrenome { get; set; }
+
+        // Propriedade somente leitura (get-only) que retorna o nome completo.
+        // O "=>" é uma forma concisa de definir uma propriedade que retorna o resultado de uma expressão.
+        public string NomeCompleto => $"{Nome} {Sobrenome}".ToUpper();
+    }
+}
+
+#Suite.cs
+Esta classe define os atributos de uma suíte, como tipo, capacidade e valor da diária.
+
+namespace DesafioProjetoHospedagem.Models
+{
+    public class Suite
+    {
+        // Construtor padrão.
+        public Suite() { }
+
+        // Construtor completo para inicializar todos os dados da suíte de uma vez.
+        public Suite(string tipoSuite, int capacidade, decimal valorDiaria)
+        {
+            TipoSuite = tipoSuite;
+            Capacidade = capacidade;
+            ValorDiaria = valorDiaria;
+        }
+
+        // Propriedade que armazena o tipo da suíte (ex: "Premium", "Luxo").
+        public string TipoSuite { get; set; }
+
+        // Propriedade que define o número máximo de pessoas que a suíte pode acomodar.
+        public int Capacidade { get; set; }
+
+        // Propriedade que armazena o valor da diária da suíte.
+        public decimal ValorDiaria { get; set; }
+    }
+}
+}
+
+#Reserva.cs
+Esta é a classe central que gerencia a reserva, conectando hóspedes e suítes, e aplicando as regras de negócio.
+
+using System;
+using System.Collections.Generic;
+
+namespace DesafioProjetoHospedagem.Models
+{
+    public class Reserva
+    {
+        // Construtor padrão.
+        public Reserva() { }
+
+        // Construtor que recebe a quantidade de dias reservados.
+        public Reserva(int diasReservados)
+        {
+            DiasReservados = diasReservados;
+        }
+
+        // Propriedade para a lista de hóspedes da reserva.
+        public List<Pessoa> Hospedes { get; set; }
+
+        // Propriedade para a suíte associada a esta reserva.
+        public Suite Suite { get; set; }
+
+        // Propriedade para a quantidade de dias que a suíte será reservada.
+        public int DiasReservados { get; set; }
+
+        // Método para cadastrar a lista de hóspedes na reserva.
+        public void CadastrarHospedes(List<Pessoa> hospedes)
+        {
+            // Valida a regra de negócio: a quantidade de hóspedes não pode ser maior que a capacidade da suíte.
+            if (hospedes.Count <= Suite.Capacidade)
+            {
+                // Se a validação passar, a lista de hóspedes é atribuída à reserva.
+                Hospedes = hospedes;
+            }
+            else
+            {
+                // Se a validação falhar, uma exceção é lançada, impedindo a reserva.
+                throw new Exception("A capacidade da suíte é menor do que a quantidade de hóspedes.");
+            }
+        }
+
+        // Método para cadastrar a suíte na reserva.
+        public void CadastrarSuite(Suite suite)
+        {
+            Suite = suite;
+        }
+
+        // Método que retorna a quantidade total de hóspedes.
+        public int ObterQuantidadeHospedes()
+        {
+            // Acessa a propriedade .Count da lista para obter o número de hóspedes.
+            return Hospedes.Count;
+        }
+
+        // Método para calcular o valor total da reserva.
+        public decimal CalcularValorDiaria()
+        {
+            // Calcula o valor base da reserva multiplicando os dias pelo valor da diária.
+            decimal valorTotal = DiasReservados * Suite.ValorDiaria;
+
+            // Aplica a regra de negócio: se a reserva for de 10 dias ou mais, concede um desconto de 10%.
+            if (DiasReservados >= 10)
+            {
+                // Calcula o desconto de 10% sobre o valor total. O sufixo 'M' indica que o número é um decimal.
+                decimal desconto = valorTotal * 0.10M;
+
+                // Subtrai o valor do desconto do valor total.
+                valorTotal -= desconto;
+            }
+
+            // Retorna o valor final, já com o desconto aplicado se aplicável.
+            return valorTotal;
+        }
+    }
+}
