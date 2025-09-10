@@ -15,16 +15,13 @@ namespace DesafioProjetoHospedagem.Models
 
         public void CadastrarHospedes(List<Pessoa> hospedes)
         {
-            // TODO: Verificar se a capacidade é maior ou igual ao número de hóspedes sendo recebido
-            // *IMPLEMENTE AQUI*
-            if (true)
+            if (hospedes.Count <= Suite.Capacidade)
             {
                 Hospedes = hospedes;
             }
             else
             {
-                // TODO: Retornar uma exception caso a capacidade seja menor que o número de hóspedes recebido
-                // *IMPLEMENTE AQUI*
+                throw new Exception("A capacidade da suíte é menor do que o número de hóspedes.");
             }
         }
 
@@ -35,26 +32,26 @@ namespace DesafioProjetoHospedagem.Models
 
         public int ObterQuantidadeHospedes()
         {
-            // TODO: Retorna a quantidade de hóspedes (propriedade Hospedes)
-            // *IMPLEMENTE AQUI*
-            return 0;
-        }
+    return Hospedes.Count;
+}
 
-        public decimal CalcularValorDiaria()
-        {
-            // TODO: Retorna o valor da diária
-            // Cálculo: DiasReservados X Suite.ValorDiaria
-            // *IMPLEMENTE AQUI*
-            decimal valor = 0;
+       public decimal CalcularValorDiaria()
+{
+    // Calcula o valor total, multiplicando os dias reservados pelo valor da diária da suíte
+    decimal valorTotal = DiasReservados * Suite.ValorDiaria;
 
-            // Regra: Caso os dias reservados forem maior ou igual a 10, conceder um desconto de 10%
-            // *IMPLEMENTE AQUI*
-            if (true)
-            {
-                valor = 0;
-            }
+    // Regra: Concede um desconto de 10% se a reserva for de 10 ou mais dias
+    if (DiasReservados >= 10)
+    {
+        // Calcula o valor do desconto (10% do valor total)
+        decimal desconto = valorTotal * 0.10M;
+        
+        // Subtrai o desconto do valor total
+        valorTotal -= desconto;
+    }
 
-            return valor;
-        }
+    // Retorna o valor final, com ou sem o desconto aplicado
+    return valorTotal;
+}
     }
 }
