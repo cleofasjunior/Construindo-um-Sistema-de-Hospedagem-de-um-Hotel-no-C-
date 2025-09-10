@@ -1,21 +1,66 @@
-# DIO - Trilha .NET - Explorando a linguagem C#
-www.dio.me
+# 🚀 Explorando C# com POO: Sistema de Reservas de Hotel
 
-## Desafio de projeto
-Para este desafio, você precisará usar seus conhecimentos adquiridos no módulo de explorando a linguagem C#, da trilha .NET da DIO.
+Projeto desenvolvido no módulo **Explorando a linguagem C#**, da trilha **.NET** da [DIO](https://www.dio.me).
 
-## Contexto
-Você foi contratado para construir um sistema de hospedagem, que será usado para realizar uma reserva em um hotel. Você precisará usar a classe Pessoa, que representa o hóspede, a classe Suíte, e a classe Reserva, que fará um relacionamento entre ambos.
+Este desafio teve como objetivo consolidar conceitos fundamentais da linguagem C# e aplicar boas práticas de programação orientada a objetos (POO) na construção de um sistema de hospedagem.
 
-O seu programa deverá cálcular corretamente os valores dos métodos da classe Reserva, que precisará trazer a quantidade de hóspedes e o valor da diária, concedendo um desconto de 10% para caso a reserva seja para um período maior que 10 dias.
+---
 
-## Regras e validações
-1. Não deve ser possível realizar uma reserva de uma suíte com capacidade menor do que a quantidade de hóspedes. Exemplo: Se é uma suíte capaz de hospedar 2 pessoas, então ao passar 3 hóspedes deverá retornar uma exception.
-2. O método ObterQuantidadeHospedes da classe Reserva deverá retornar a quantidade total de hóspedes, enquanto que o método CalcularValorDiaria deverá retornar o valor da diária (Dias reservados x valor da diária).
-3. Caso seja feita uma reserva igual ou maior que 10 dias, deverá ser concedido um desconto de 10% no valor da diária.
+## 📌 Desafio de Projeto
 
+Construir um sistema de hotelaria capaz de:
 
-![Diagrama de classe estacionamento](diagrama_classe_hotel.png)
+* Gerenciar **hóspedes** (`Pessoa`),
+* Definir **suítes** (`Suite`),
+* Controlar **reservas** (`Reserva`).
 
-## Solução
-O código está pela metade, e você deverá dar continuidade obedecendo as regras descritas acima, para que no final, tenhamos um programa funcional. Procure pela palavra comentada "TODO" no código, em seguida, implemente conforme as regras acima.
+O sistema deve permitir o cálculo do valor total da diária com base no número de dias reservados, aplicar descontos quando aplicável e validar a capacidade da suíte conforme o número de hóspedes.
+
+---
+
+## 🎯 Habilidades Desenvolvidas
+
+Durante a implementação do projeto, foram reforçadas e praticadas as seguintes habilidades:
+
+* ✅ **Programação Orientada a Objetos (POO)**: criação e relacionamento de classes (`Pessoa`, `Suite`, `Reserva`).
+* ✅ **Encapsulamento**: definição de propriedades e métodos para proteger dados e expor apenas o necessário.
+* ✅ **Validações de regras de negócio**: garantir que uma suíte não seja reservada para mais hóspedes do que sua capacidade.
+* ✅ **Tratamento de exceções**: lançamento de erros personalizados para cenários inválidos.
+* ✅ **Lógica de cálculos e descontos**: aplicação de fórmulas para valor da diária e regras de desconto progressivo.
+* ✅ **Boas práticas em C#**: uso de construtores, métodos de retorno, tipagem forte e clareza no código.
+
+---
+
+## 📖 Regras e Validações Implementadas
+
+1. Não é permitido realizar reserva de suíte com capacidade inferior ao número de hóspedes.
+
+   * Exemplo: Suíte para 2 pessoas não pode receber 3 hóspedes.
+2. O método `ObterQuantidadeHospedes` deve retornar o número total de hóspedes.
+3. O método `CalcularValorDiaria` deve multiplicar os dias reservados pelo valor da diária.
+4. Reservas **iguais ou superiores a 10 dias** recebem **10% de desconto** no valor final.
+
+---
+
+## 🛠️ Estrutura do Sistema
+
+* **Classe `Pessoa`** → Representa um hóspede.
+* **Classe `Suite`** → Define informações da suíte (capacidade e valor da diária).
+* **Classe `Reserva`** → Relaciona hóspedes e suíte, contendo regras de negócio e cálculos.
+
+---
+
+## 📊 Diagrama de Classes
+
+![Diagrama de classe hotel](diagrama_classe_hotel.png)
+
+---
+
+## 🚀 Aprendizados
+
+Este desafio proporcionou uma experiência prática com:
+
+* Modelagem de sistemas reais utilizando POO.
+* Implementação de regras de negócio em classes.
+* Cálculo automatizado com base em condições específicas.
+* Uso de **C#** em um cenário próximo ao mercado.
